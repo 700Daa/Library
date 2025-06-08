@@ -1,0 +1,15 @@
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\bin\Debug\net8.0\EL3oMaNy.exe
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\bin\Debug\net8.0\EL3oMaNy.deps.json
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\bin\Debug\net8.0\EL3oMaNy.runtimeconfig.json
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\bin\Debug\net8.0\EL3oMaNy.dll
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\bin\Debug\net8.0\EL3oMaNy.pdb
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.AssemblyInfoInputs.cache
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.AssemblyInfo.cs
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.csproj.CoreCompileInputs.cache
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.dll
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\refint\EL3oMaNy.dll
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.pdb
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.genruntimeconfig.cache
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\ref\EL3oMaNy.dll
+C:\Users\loq\Desktop\Progects\EL3oMaNy\EL3oMaNy\obj\Debug\net8.0\EL3oMaNy.sourcelink.json
