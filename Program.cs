@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
+using System.Collections.Generic; // to uses Lists<> 
+using System.IO; // to use File, StreamWriter, StreamReader
+using System.Linq; // to use LINQ methods like Where, ToList
+using System.Threading; // to use Thread.Sleep
 
 
 class LibrarySystem
@@ -28,7 +28,7 @@ class LibrarySystem
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         WelcomeScreen();
 
-        // تسجيل او تعمل حساب جديد 
+        // login or create account
         int yourChoice = choseSignInOrUp();
         Choice(yourChoice);
     }
@@ -40,8 +40,8 @@ class LibrarySystem
 
         int startLeft = 10;
         int startTop = Console.CursorTop;
-
-        PrintE(startLeft, startTop);
+        // Print the welcome message with animated letters
+        PrintE(startLeft, startTop); 
         PrintL(startLeft + 8, startTop);
         Print3(startLeft + 16, startTop);
         PrintO(startLeft + 25, startTop);
@@ -54,8 +54,8 @@ class LibrarySystem
 
     static int choseSignInOrUp()
     {
-        int your_choice;
-        bool isValidInput;
+        int your_choice; 
+        bool isValidInput; 
 
         do
         {
@@ -68,14 +68,14 @@ class LibrarySystem
             string input = Console.ReadLine();
             isValidInput = int.TryParse(input, out your_choice);
 
-            if (!isValidInput || (your_choice != 1 && your_choice != 2 && your_choice != 2145879541))
+            if (!isValidInput || (your_choice != 1 && your_choice != 2))
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Invalid input! Please enter 1 or 2.");
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        while (!isValidInput || (your_choice != 1 && your_choice != 2 && your_choice != 2145879541));
+        while (!isValidInput || (your_choice != 1 && your_choice != 2));
 
         return your_choice;
     }
@@ -90,14 +90,14 @@ class LibrarySystem
         {
             CreateNewAccount();
         }
-        else if (choice == 2145879541)
-        {
-            Admin();
-        }
     }
 
     static void SignIn()
     {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("SignIn");
+        Console.ForegroundColor = ConsoleColor.White;
         Console.Write("Enter your username: ");
         string username = Console.ReadLine();
         int trayes = 3;
@@ -222,124 +222,31 @@ class LibrarySystem
 
     static void CreateNewAccount()
     {
-        Console.Write("Enter a new username: ");
-        string username = Console.ReadLine();
-        Console.Write("Enter a new password: ");
-        string password = Console.ReadLine();
-
-
-
-        using (StreamWriter file = new StreamWriter("users.txt", true))
-        {
-            file.WriteLine($"{username} {password}");
-            Console.WriteLine("Account created successfully!");
-        }
-        SignIn();
-    }
-
-    static void Admin()
-    {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Welcome to the Admin Panel!");
-        Console.ForegroundColor = ConsoleColor.White;
-        AdminMenu();
-
-    }
-
-    static void AdminMenu()
-    {
-        Console.Clear();
-        Console.WriteLine("Admin Menu:");
-        Console.WriteLine("1. View all users");
-        Console.WriteLine("2. Delete a user");
-        Console.WriteLine("3. Exit to main menu");
-        bool choicebo;
-        int choicein;
+        bool createAccountOk = false;
         do
         {
-            string choice = Console.ReadLine();
-            choicebo = int.TryParse(choice, out choicein);
-            if (choicein < 1 || choicein > 3)
+            Console.Write("Enter a new username: ");
+            string username = Console.ReadLine();
+            Console.Write("Enter a new password: ");
+            string password = Console.ReadLine();
+            if (username.Length < 3 || password.Length < 3)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Invalid choice! Please select 1-3.");
+                Console.WriteLine("Username and password must be at least 3 characters long. Please try again.");
                 Console.ForegroundColor = ConsoleColor.White;
+                continue;
             }
             else
             {
-                switch (choicein)
+                using (StreamWriter file = new StreamWriter("users.txt", true))
                 {
-                    case 1:
-                        ViewAllUsers();
-                        break;
-                    case 2:
-                        DeleteUser();
-                        break;
-                    case 3:
-                        MainMenu();
-                        break;
-                    default:
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("Invalid choice! Please select 1-3.");
-                        Console.ForegroundColor = ConsoleColor.White;
-                        break;
+                    file.WriteLine($"{username} {password}");
+                    Console.WriteLine("Account created successfully!");
                 }
+                SignIn();
             }
-        } while (choicein != 3);
+        }while (!createAccountOk);
     }
-
-    static void ViewAllUsers()
-    {
-        Console.Clear();
-        Console.WriteLine("All Users:");
-        if (File.Exists("users.txt"))
-        {
-            string[] lines = File.ReadAllLines("users.txt");
-            foreach (string line in lines)
-            {
-                Console.WriteLine(line);
-            }
-        }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("No users found.");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine("\nPress any key to continue...");
-        Console.ReadKey();
-        Console.ForegroundColor = ConsoleColor.White;
-        AdminMenu();
-    }
-
-    static void DeleteUser()
-    {
-        Console.Clear();
-        Console.WriteLine("Delete User:");
-        Console.Write("Enter the username to delete: ");
-        string usernameToDelete = Console.ReadLine();
-        if (File.Exists("users.txt"))
-        {
-            string[] lines = File.ReadAllLines("users.txt");
-            List<string> updatedLines = lines.Where(line => !line.StartsWith(usernameToDelete + " ")).ToList();
-            File.WriteAllLines("users.txt", updatedLines);
-            Console.WriteLine($"User '{usernameToDelete}' deleted successfully!");
-        }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("No users found.");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine("\nPress any key to continue...");
-        Console.ReadKey();
-        Console.ForegroundColor = ConsoleColor.White;
-        AdminMenu();
-    }
-
     static void MainMenu()
     {
         int choice;

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\loq\\Desktop\\Progects\\EL3oMaNy\\EL3oMaNy\\EL3oMaNy.csproj",
+      "projectUniqueName": "C:\\Users\\loq\\Desktop\\Library\\EL3oMaNy.csproj",
       "projectName": "EL3oMaNy",
-      "projectPath": "C:\\Users\\loq\\Desktop\\Progects\\EL3oMaNy\\EL3oMaNy\\EL3oMaNy.csproj",
+      "projectPath": "C:\\Users\\loq\\Desktop\\Library\\EL3oMaNy.csproj",
       "packagesPath": "C:\\Users\\loq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\loq\\Desktop\\Progects\\EL3oMaNy\\EL3oMaNy\\obj\\",
+      "outputPath": "C:\\Users\\loq\\Desktop\\Library\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
