@@ -1,98 +1,108 @@
-# 📖 Overview
 
-A simple C# library management system that allows users to borrow and return English and Arabic books with an interactive user interface.
+# 📚 Library Management System (C#)
+
+A simple and interactive C# library management system that allows users to borrow and return books in **English** and **Arabic**, with a modern user interface and multilingual support.
+
+---
 
 ## ✨ Key Features
-Attractive UI with animated welcome screen
 
-Bilingual support (Arabic and English)
+- 🎨 **Attractive UI** with animated welcome screen
+- 🌐 **Bilingual Support** (Arabic & English)
+- 🔐 **Secure Login System** with account creation
+- 📖 **Book Management**:
+  - View available books
+  - Borrow books
+  - Return books
+- 📜 **Arabic Text Support** (Right-to-Left layout)
+- ⚙️ **Admin Panel** for system administrators
 
-Secure login system with user account management
-
-Book management:
-
-View available books
-
-Borrow books
-
-Return books
-
-Arabic text support (RTL - Right-to-Left)
-
-Admin panel for system administrators
+---
 
 ## 📥 Requirements
-.NET 8.0
 
-Visual Studio 2022 (or any C# compatible IDE)
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) (or any compatible C# IDE)
+
+---
 
 ## 🚀 How to Run
-Clone the repository:
 
-open cmd in new folder write 
+1. Open **CMD** in an empty folder and run:
+   ```bash
+   git clone https://github.com/700Daa/Library.git
+   ```
+2. Open the project in **Visual Studio**
+3. Press `F5` to **Build and Run** the project
 
-git clone https://github.com/700Daa/Library.git
-Open the project in Visual Studio
-
-Press F5 to build and run the project
+---
 
 ## 🧑‍💻 How to Use
-create a new account and Login
 
-Select library (Arabic or English)
+1. Create a new user account and login
+2. Choose your preferred library language (Arabic or English)
+3. Browse the list of available books
+4. Borrow or return books as needed
 
-Browse available books
-
-Borrow or return books as needed
+---
 
 ## 📂 File Structure
+
+```
 Library/
+├── Program.cs        # Main application logic
+├── users.txt         # User database (stored in bin\Debug\net8.0)
+├── README.md         # Project documentation
+```
 
-├── Program.cs          # Main code file
-
-├── users.txt           # User database (in bin\Debug\net8.0)
-
-├── README.md           # This file
+---
 
 ## 📚 Available Books
-English Books:
 
-The Push
+### 📘 English Books:
+- *The Push*
+- *Bride Read*
+- *The Hedge*
+- *It*
+- *The Coming of the Ice*
 
-Bride Read
+### 📗 Arabic Books:
+- في قلبي أنثى عبرية
+- أرض زيكولا 1
+- أرض زيكولا 2
+- أرض زيكولا: ما وراء الكواليس
 
-The Hedge
-
-It
-
-The Coming of the Ice
-
-Arabic Books:
-
-في قلبي انثى عبرية
-
-ارض زيكولا 1
-
-ارض زيكولا 2
-
-ارض زيكولا
-ما وراء الكواليس 
+---
 
 ## 🤝 Contributing
 
-Fork the project
+Contributions are welcome!  
+Follow these simple steps:
 
-Create new branch (git checkout -b feature/your-feature)
+1. **Fork** the repository
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. Push your changes:
+   ```bash
+   git push origin feature/your-feature
+   ```
+5. Create a **Pull Request**
 
-Commit changes (git commit -m "Add your feature")
-
-Push changes (git push origin feature/your-feature)
-
-Create Pull Request
+---
 
 ## 📜 License
-This project is not licensed .
+
+This project is **not licensed**. All rights reserved by the developer.
+
+---
 
 ## 📞 Contact Developer
 
-Developer EL3oMaNy
+**Developer:** EL3oMaNy  
+For inquiries, feel free to reach out via GitHub or email
