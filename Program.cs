@@ -17,6 +17,7 @@ class LibrarySystem
         "Fundamentals-of-Computer-Programming-with-CSharp",
         "Clean Code and Writing Better Code",
         "Dracula",
+        "",
         };
 
    private static List<string> enBooksDetails = new List<string> 
@@ -99,7 +100,7 @@ class LibrarySystem
     static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
-        WelcomeScreen();
+        //WelcomeScreen();
 
         // login or create account
         int yourChoice = choseSignInOrUp();
@@ -171,14 +172,14 @@ class LibrarySystem
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("SignIn");
         Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("Enter your username: ");
-        string username = Console.ReadLine();
         int trayes = 3;
         bool loginOk = false;
         int forgetPassword;
         do
         {
             Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Enter your username: ");
+            string username = Console.ReadLine();   
             Console.Write("Enter your password: ");
             string password = Console.ReadLine();
 
@@ -320,6 +321,7 @@ class LibrarySystem
             }
         }while (!createAccountOk);
     }
+
     static void MainMenu()
     {
         int choice;
@@ -429,7 +431,7 @@ class LibrarySystem
                     break;
             }
         }
-        while (bookChoice != 4);
+        while (bookChoice != 5);
     }
 
     static void ViewEnglishBooks()
@@ -487,6 +489,7 @@ class LibrarySystem
         Console.ReadKey();
         Console.ForegroundColor = ConsoleColor.White;
     }
+
     static void BorrowEnglishBook()
     {
         Console.ForegroundColor = ConsoleColor.Green;
@@ -537,6 +540,7 @@ class LibrarySystem
             Console.ForegroundColor = ConsoleColor.White;
         }
     }
+
     static void ViewBorrowedEnglishBooks()
     {
         Console.Clear();
@@ -728,7 +732,7 @@ class LibrarySystem
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        while (bookChoice != 4);
+        while (bookChoice != 5);
     }
 
     static void ViewArabicBooks()
@@ -910,12 +914,13 @@ class LibrarySystem
             Console.ForegroundColor = ConsoleColor.White;
         }
     }
-        static void ReturnArabicBook()
+    
+    static void ReturnArabicBook()
     {
         if (arBorrowedBooks.Count == 0)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(Reverse("لا يوجد كتب مستعارة"));
+            Console.WriteLine(Reverse("\nلا يوجد كتب مستعارة"));
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
             Console.ReadKey();
