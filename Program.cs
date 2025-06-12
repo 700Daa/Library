@@ -100,7 +100,7 @@ class LibrarySystem
     static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
-        //WelcomeScreen();
+        WelcomeScreen();
 
         // login or create account
         int yourChoice = choseSignInOrUp();
