@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic; // to uses Lists<> 
 using System.IO; // to use File, StreamWriter, StreamReader
 using System.Linq; // to use LINQ methods like Where, ToList
@@ -9,20 +9,94 @@ class LibrarySystem
 {
     private static List<string> arBorrowedBooks = new List<string>();
     private static List<string> enBorrowedBooks = new List<string>();
-    private static List<string> EnglishBooks = new List<string> { "The Push", "Bride Read", "The Hedge", "It", "The Coming of the Ice" };
-    private static List<string> ArabicBooks = new List<string> { Reverse("في قلبي انثى عبرية"), Reverse("ارض زيكولا 1"), Reverse("ارض زيكولا 2"), Reverse("ارض زيكولا 3"), Reverse("ما وراء الكواليس الدحيح") };
+    private static List<string> EnglishBooks = new List<string> {
+        "The Way to Happiness",
+        "Romeo and Juliet",
+        "To Kill A Mockingbird",
+        "Visual C# How to Program",
+        "Fundamentals-of-Computer-Programming-with-CSharp",
+        "Clean Code and Writing Better Code",
+        "Dracula",
+        "",
+        };
+
+   private static List<string> enBooksDetails = new List<string> 
+   {
+        "A self-help book by L. Ron Hubbard promoting ethical living and personal improvement.",
+        "A classic tragedy by William Shakespeare about love and fate.",
+        "A Pulitzer Prize-winning novel by Harper Lee about racial injustice in the Deep South.",
+        "An introductory programming book using Visual C# as the primary language.",
+        "A comprehensive guide to computer programming concepts using C#.",
+        "A book on software craftsmanship focusing on writing clean and maintainable code.",
+        "A Gothic horror novel by Bram Stoker featuring the iconic character Dracula.",
+        };
+
     private static List<string> enBookLinks = new List<string> {
-        "https://www.readanybook.com/online/684299",
-        "https://www.readanybook.com/online/765632#583144",
-        "https://www.readanybook.com/online/765193#582482",
-        "https://www.readanybook.com/ebook/it-book-565296",
-        "https://www.readanybook.com/online/10556#9479" };
+        "https://heyzine.com/flip-book/5285919977.html",
+        "https://heyzine.com/flip-book/a7ccb60e93.html",
+        "https://heyzine.com/flip-book/7f81761ea2.html",
+        "https://heyzine.com/flip-book/d9634d117d.html",
+        "https://heyzine.com/flip-book/98d5dd69ea.html",
+        "https://heyzine.com/flip-book/59dff7238e.html",
+        "https://heyzine.com/flip-book/a7894b2eb2.html",
+        "",
+        };
+
+
+    private static List<string> ArabicBooks = new List<string> { 
+        Reverse("ارض زيكولا 1"),
+        Reverse("ارض زيكولا 2"),
+        Reverse("ارض زيكولا 3"),
+        Reverse("ما وراء الكواليس الدحيح"),
+        Reverse("خوف 1"),
+        Reverse("خوف 2"),
+        Reverse("خوف 3"),
+        Reverse("نادر فوده -الوقاد- 1"),
+        Reverse("نادر فوده -كساب- 2"),
+        Reverse("نادر فوده -النقش الملعون- 3"),
+        Reverse("نادر فوده -عمارة الفزع- 4"),
+        Reverse("نادر فوده -العين الثالة- 5"),
+        Reverse("نادر فوده -العذراء والجحيم- 6"),
+        Reverse("نادر فوده -الاعوان- 7"),
+        Reverse("نادر فوده -الآثم- 8")
+        };
+    
+    private static List<string> arBorrowedBooksDetails = new List<string> 
+    {
+        Reverse("رواية خيالية تتحدث عن مغامرات في عالم زيكولا"),
+        Reverse("تكملة مغامرات زيكولا"),
+        Reverse("الجزء الثالث من سلسلة زيكولا"),
+        Reverse("كتاب يتحدث عن كواليس برنامج الدحيح"),
+        Reverse("رواية رعب تتحدث عن الخوف"),
+        Reverse("تكملة رواية الخوف"),
+        Reverse("الجزء الثالث من سلسلة الخوف"),
+        Reverse("الجزء الأول من سلسلة نادر فوده"),
+        Reverse("الجزء الثاني من سلسلة نادر فوده"),
+        Reverse("الجزء الثالث من سلسلة نادر فوده"),
+        Reverse("الجزء الرابع من سلسلة نادر فوده"),
+        Reverse("الجزء الخامس من سلسلة نادر فوده"),
+        Reverse("الجزء السادس من سلسلة نادر فوده"),
+        Reverse("الجزء السابع من سلسلة نادر فوده"),
+        Reverse("الجزء الثامن من سلسلة نادر فوده")
+    };
+
     private static List<string> arBookLinks = new List<string> {
-        "https://docs.google.com/viewerng/viewer?hl=ar&t=1&url=https://www.alarabimag.com/books/22459.pdf",
-        "https://docs.google.com/viewerng/viewer?hl=ar&t=8&url=https://www.alarabimag.com/books/22375.pdf",
-        "https://docs.google.com/viewerng/viewer?hl=ar&t=22&url=https://www.alarabimag.com/books/34834.pdf",
-        "https://archive.org/details/2_20240503_20240503_0905/1-%20%D8%A3%D8%B1%D8%B6%20%D8%B2%D9%8A%D9%83%D9%88%D9%84%D8%A7",
-        "https://kolalkotob.com/read/3141" };
+        "https://heyzine.com/flip-book/199202c88a.html",
+        "https://heyzine.com/flip-book/65cd4ebb98.html",
+        "https://heyzine.com/flip-book/b78ab34897.html",
+        "https://heyzine.com/flip-book/7f72b1f2d1.html",
+        "https://online.fliphtml5.com/dorsa/vmzx/#p=1",
+        "https://heyzine.com/flip-book/cab65f368f.html",
+        "https://heyzine.com/flip-book/93d12995d9.html",
+        "https://heyzine.com/flip-book/7331a5dc27.html",
+        "https://heyzine.com/flip-book/c961b23b07.html",
+        "https://heyzine.com/flip-book/d444789d9f.html",
+        "https://heyzine.com/flip-book/7baf603671.html",
+        "https://heyzine.com/flip-book/e83d20e49d.html",
+        "https://heyzine.com/flip-book/cda68d78e2.html",
+        "https://heyzine.com/flip-book/f718fc8691.html",
+        "https://heyzine.com/flip-book/b3555f6e4f.html"
+        };
     static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -317,10 +391,11 @@ class LibrarySystem
             Console.WriteLine("\nEnglish Library Menu");
             Console.WriteLine("1. View Books");
             Console.WriteLine("2. Borrow a book");
-            Console.WriteLine("3. Return a book");
-            Console.WriteLine("4. Back to main menu");
+            Console.WriteLine("3. View Borrowed books");
+            Console.WriteLine("4. Return a book");
+            Console.WriteLine("5. Back to main menu");
             Console.WriteLine("----------------------");
-            Console.WriteLine("Choose an action (1-4):");
+            Console.WriteLine("Choose an action (1-5):");
             Console.WriteLine("----------------------");
 
             if (!int.TryParse(Console.ReadLine(), out bookChoice))
@@ -338,9 +413,12 @@ class LibrarySystem
                     BorrowEnglishBook();
                     break;
                 case 3:
-                    ReturnEnglishBook();
+                    ViewBorrowedEnglishBooks();
                     break;
                 case 4:
+                    ReturnEnglishBook();
+                    break;
+                case 5:
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -378,16 +456,16 @@ class LibrarySystem
                 if (bookChose > 0 && bookChose <= EnglishBooks.Count)
                 {
                     Console.WriteLine("\nYou chose: " + EnglishBooks[bookChose - 1]);
-                    if (bookChose <= enBookLinks.Count)
+                    if (bookChose <= enBooksDetails.Count)
                     {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("Link to Read: \n" + enBookLinks[bookChose - 1]);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(enBooksDetails[bookChose - 1]);
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("No available link for this book.");
+                        Console.WriteLine("No available Details for this book.");
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
@@ -421,19 +499,19 @@ class LibrarySystem
         Console.WriteLine("Enter number of book you want to borrow: ");
         if (int.TryParse(Console.ReadLine(), out int bookIndex))
         {
-            // التحقق من أن الفهرس صالح
+            
             if (bookIndex > 0 && bookIndex <= EnglishBooks.Count)
             {
-                // تصحيح الفهرس ليكون من صفر
+                
                 int correctedIndex = bookIndex - 1;
 
-                // التأكد من أن القائمة لها حجم كافٍ
+                
                 while (enBorrowedBooks.Count <= correctedIndex)
                 {
-                    enBorrowedBooks.Add(null); // أو string.Empty حسب احتياجك
+                    enBorrowedBooks.Add(null); 
                 }
 
-                // إضافة الكتاب المستعار في نفس الفهرس
+                
                 enBorrowedBooks[correctedIndex] = EnglishBooks[correctedIndex];
 
                 Console.Write("Borrowed ");
@@ -441,6 +519,10 @@ class LibrarySystem
                 Console.WriteLine(enBorrowedBooks[correctedIndex]);
                 Console.ResetColor();
                 Console.WriteLine("Total borrowed English books: " + enBorrowedBooks.Where(b => b != null).Count());
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {
@@ -456,7 +538,81 @@ class LibrarySystem
             Console.ForegroundColor = ConsoleColor.White;
         }
     }
-    
+    static void ViewBorrowedEnglishBooks()
+    {
+        Console.Clear();
+        Console.WriteLine("Borrowed English Books:\n");
+        if (enBorrowedBooks.Count == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("No books are currently borrowed.");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int i = 0; i < enBorrowedBooks.Count; i++)
+            {
+                if (enBorrowedBooks[i] != null)
+                {
+                    Console.WriteLine($"{i + 1}. {enBorrowedBooks[i]}");
+                }
+            }
+        }
+        Console.ForegroundColor = ConsoleColor.White;
+        if (enBorrowedBooks.Count != 0)
+        {
+            Console.WriteLine("\nEnter the number of the book need Read");
+            Console.WriteLine("or 0 to cancel: ");
+            if (int.TryParse(Console.ReadLine(), out int bookChose))
+            {
+                if (bookChose > 0 && bookChose <= enBorrowedBooks.Count)
+                {
+                    Console.Write("\nYou chose: " ) ;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine(EnglishBooks[bookChose - 1]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    if (bookChose <= enBookLinks.Count)
+                    {
+                        Console.WriteLine("Link to Read:");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine(enBookLinks[bookChose - 1]);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("No available link for this book.");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
+                else if (bookChose != 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Invalid choice!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Invalid input!");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+    }
+
     static void ReturnEnglishBook()
     {
         if (enBorrowedBooks.Count == 0)
@@ -531,10 +687,11 @@ class LibrarySystem
             Console.WriteLine(Reverse("\nقائمة الكتب العربيه"));
             Console.WriteLine(Reverse("1. عرض الكتب"));
             Console.WriteLine(Reverse("2. استعارة كتاب"));
-            Console.WriteLine(Reverse("3. اعادة كتاب"));
-            Console.WriteLine(Reverse("4. العوده الي القائمه الرئيسيه"));
+            Console.WriteLine(Reverse("3. عرض الكتب المستعارة"));
+            Console.WriteLine(Reverse("4. اعادة كتاب"));
+            Console.WriteLine(Reverse("5. العوده الي القائمه الرئيسيه"));
             Console.WriteLine("-----------------------");
-            Console.WriteLine(Reverse("اختر من القائمه= )1-4(:"));
+            Console.WriteLine(Reverse("اختر من القائمه= )1-5(:"));
             Console.WriteLine("-----------------------");
 
             if (int.TryParse(Console.ReadLine(), out bookChoice))
@@ -548,9 +705,12 @@ class LibrarySystem
                         BorrowArabicBook();
                         break;
                     case 3:
-                        ReturnArabicBook();
+                        ViewBorrowedArabicBooks();
                         break;
                     case 4:
+                        ReturnArabicBook();
+                        break;
+                    case 5:
                         MainMenu();
                         break;
                     default:
@@ -579,7 +739,7 @@ class LibrarySystem
         if (ArabicBooks.Count == 0)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine(Reverse("لا كتب متاحه في المكتبه العربيه."));
+            Console.WriteLine(Reverse("لا يوجد كتب متاحه في المكتبه العربيه."));
             Console.ForegroundColor = ConsoleColor.White;
         }
         else
@@ -594,17 +754,21 @@ class LibrarySystem
             {
                 if (book_choice > 0 && book_choice <= ArabicBooks.Count)
                 {
-                    Console.WriteLine(ArabicBooks[book_choice - 1] + Reverse(" لقد اخترت : "));
+                    
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write(ArabicBooks[book_choice - 1]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(Reverse(" لقد اخترت : "));
                     if (book_choice <= arBookLinks.Count)
                     {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine(Reverse("\nرابط القراءه: ") + arBookLinks[book_choice - 1]);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(arBorrowedBooksDetails[book_choice - 1]);
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine(Reverse("لا روابط متاحه لهذا الكتاب."));
+                        Console.WriteLine(Reverse("لا تفاصيل متاحه لهذا الكتاب."));
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
@@ -648,11 +812,16 @@ class LibrarySystem
                     arBorrowedBooks.Add(null); // أو string.Empty حسب احتياجك
                 }
                 arBorrowedBooks[correctedIndex] = ArabicBooks[correctedIndex];
-                Console.WriteLine(Reverse("تم استعارة  "));
+               
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine(arBorrowedBooks[correctedIndex]);
+                Console.Write(arBorrowedBooks[correctedIndex]);
                 Console.ResetColor();
-                Console.WriteLine(Reverse("الكتب المستعاره الكليه ") + arBorrowedBooks.Where(b => b != null).Count());
+                Console.WriteLine(Reverse("تم استعارة:  "));
+                Console.WriteLine( arBorrowedBooks.Where(b => b != null).Count()+ Reverse("الكتب المستعاره الكليه: "));
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
+                Console.ReadKey();
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {
@@ -669,7 +838,80 @@ class LibrarySystem
         }
     }
 
-    static void ReturnArabicBook()
+    static void ViewBorrowedArabicBooks()
+    {
+        Console.Clear();
+        Console.WriteLine(Reverse("الكتب المستعارة العربيه:"));
+        if (arBorrowedBooks.Count == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(Reverse("لا يوجد كتب مستعارة حاليا."));
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int i = 0; i < arBorrowedBooks.Count; i++)
+            {
+                if (arBorrowedBooks[i] != null)
+                {
+                    Console.WriteLine($"{i + 1}. {arBorrowedBooks[i]}");
+                }
+            }
+        }
+        Console.ForegroundColor = ConsoleColor.White;
+        if (arBorrowedBooks.Count != 0)
+        {
+            Console.Write(Reverse("\nادخل رقم الكتاب المراد قراءته او 0 للالغاء: "));
+            if (int.TryParse(Console.ReadLine(), out int bookChose))
+            {
+                if (bookChose > 0 && bookChose <= arBorrowedBooks.Count)
+                {
+                    Console.Write(Reverse("\nلقد اخترت: "));
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine(ArabicBooks[bookChose - 1]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    if (bookChose <= arBookLinks.Count)
+                    {
+                        Console.WriteLine(Reverse("رابط القراءه: "));
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine(arBookLinks[bookChose - 1]);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine(Reverse("لا روابط متاحه لهذا الكتاب."));
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
+                else if (bookChose != 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(Reverse("اختيار خاطئ!"));
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine(Reverse("ادخال خاطئ!"));
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+    }
+        static void ReturnArabicBook()
     {
         if (arBorrowedBooks.Count == 0)
         {
