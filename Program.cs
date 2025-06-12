@@ -17,7 +17,6 @@ class LibrarySystem
         "Fundamentals-of-Computer-Programming-with-CSharp",
         "Clean Code and Writing Better Code",
         "Dracula",
-        "",
         };
 
    private static List<string> enBooksDetails = new List<string> 
@@ -39,7 +38,6 @@ class LibrarySystem
         "https://heyzine.com/flip-book/98d5dd69ea.html",
         "https://heyzine.com/flip-book/59dff7238e.html",
         "https://heyzine.com/flip-book/a7894b2eb2.html",
-        "",
         };
 
 
@@ -448,7 +446,7 @@ class LibrarySystem
         {
             for (int i = 0; i < EnglishBooks.Count; i++)
             {
-                Console.WriteLine((i + 1) + ". " + EnglishBooks[i]);
+                Console.WriteLine($"({i + 1}).  {EnglishBooks[i]}");
             }
 
             Console.Write("\nEnter the number of the book to view details\nor 0 to cancel: ");
@@ -495,7 +493,7 @@ class LibrarySystem
         Console.ForegroundColor = ConsoleColor.Green;
         for (int i = 0; i < EnglishBooks.Count; i++)
         {
-            Console.WriteLine((i + 1) + ". " + EnglishBooks[i]);
+            Console.WriteLine($"({i + 1}). {EnglishBooks[i]}");
         }
         Console.ResetColor();
         Console.WriteLine("Enter number of book you want to borrow: ");
@@ -558,7 +556,7 @@ class LibrarySystem
             {
                 if (enBorrowedBooks[i] != null)
                 {
-                    Console.WriteLine($"{i + 1}. {enBorrowedBooks[i]}");
+                    Console.WriteLine($"({i + 1}). {enBorrowedBooks[i]}");
                 }
             }
         }
@@ -629,14 +627,15 @@ class LibrarySystem
         }
 
         Console.WriteLine("Borrowed English Books:");
+        Console.ForegroundColor = ConsoleColor.Green;
         for (int i = 0; i < enBorrowedBooks.Count; i++)
         {
             if (enBorrowedBooks[i] != null)
             {
-                Console.WriteLine($"{i + 1}. {enBorrowedBooks[i]}");
+                Console.WriteLine($"({i + 1}). {enBorrowedBooks[i]}");
             }
         }
-
+        Console.ForegroundColor = ConsoleColor.White;
         Console.Write("\nEnter the number of the book to return (0 to cancel): ");
         if (int.TryParse(Console.ReadLine(), out int bookIndex))
         {
@@ -749,7 +748,7 @@ class LibrarySystem
         {
             for (int i = 0; i < ArabicBooks.Count; i++)
             {
-                Console.WriteLine((i + 1) + ". " + ArabicBooks[i]);
+                Console.WriteLine($"({i + 1}). {ArabicBooks[i]}");
             }
 
             Console.Write(Reverse("   اختر رقم الكتاب لعرض التفاصيل او ختر 0 للالغاء \n"));
@@ -800,7 +799,7 @@ class LibrarySystem
         Console.ForegroundColor = ConsoleColor.Green;
         for (int i = 0; i < ArabicBooks.Count; i++)
         {
-            Console.WriteLine((i + 1) + ". " + ArabicBooks[i]);
+            Console.WriteLine($"({i + 1}). {ArabicBooks[i]}");
         }
         Console.ResetColor();
         Console.Write(Reverse(" ادخل رقم الكتاب المراد استعارته:"));
@@ -858,7 +857,7 @@ class LibrarySystem
             {
                 if (arBorrowedBooks[i] != null)
                 {
-                    Console.WriteLine($"{i + 1}. {arBorrowedBooks[i]}");
+                    Console.WriteLine($"({i + 1}). {arBorrowedBooks[i]}");
                 }
             }
         }
@@ -914,7 +913,7 @@ class LibrarySystem
             Console.ForegroundColor = ConsoleColor.White;
         }
     }
-    
+
     static void ReturnArabicBook()
     {
         if (arBorrowedBooks.Count == 0)
@@ -928,14 +927,15 @@ class LibrarySystem
         }
 
         Console.WriteLine(Reverse("الكتب المستعارة"));
+        Console.ForegroundColor = ConsoleColor.Green;
         for (int i = 0; i < arBorrowedBooks.Count; i++)
         {
             if (arBorrowedBooks[i] != null)
             {
-                Console.WriteLine($"{i + 1}. {arBorrowedBooks[i]}");
+                Console.WriteLine($"({i + 1}). {arBorrowedBooks[i]}");
             }
         }
-
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(Reverse("\nأدخل رقم الكتاب للاعادة "));
         Console.Write(Reverse("(0 لإلغاء العملية): "));
         if (int.TryParse(Console.ReadLine(), out int bookIndex))
