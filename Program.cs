@@ -17,7 +17,6 @@ class LibrarySystem
         "Fundamentals-of-Computer-Programming-with-CSharp",
         "Clean Code and Writing Better Code",
         "Dracula",
-        "",
         };
 
    private static List<string> enBooksDetails = new List<string> 
