@@ -60,14 +60,14 @@ Library/
 ## 📚 Available Books
 
 ### 📘 English Books:
-- *The Push*
-- *Bride Read*
-- *The Hedge*
-- *It*
-- *The Coming of the Ice*
+- *Visual C# How to Program*
+- *Romeo and Juliet*
+- *Clean Code and Writing Better Code*
+- *Dracula*
+- *To Kill A Mockingbird*
 
 ### 📗 Arabic Books:
-- في قلبي أنثى عبرية
+- روايات رعب
 - أرض زيكولا 1
 - أرض زيكولا 2
 - أرض زيكولا: ما وراء الكواليس
