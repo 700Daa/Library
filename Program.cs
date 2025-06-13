@@ -394,7 +394,7 @@ class LibrarySystem
         do
         {
             Console.Clear();
-            Console.WriteLine("\nEnglish Library Menu");
+            Console.WriteLine("English Library Menu\n");
             Console.WriteLine("1. View Books");
             Console.WriteLine("2. Borrow a book");
             Console.WriteLine("3. View Borrowed books");
@@ -463,9 +463,9 @@ class LibrarySystem
                     Console.WriteLine($"({i + 1}).  {EnglishBooks[i]}");
                 }
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("\nEnter (s) to search ");
+                Console.WriteLine("\nEnter (*) to search ");
                 Console.ResetColor();
-                if (Console.ReadLine().ToLower() == "s")
+                if (Console.ReadLine() == "*")
                 {
                     SearchEnglishBooks();
                 }
@@ -523,28 +523,26 @@ class LibrarySystem
         Console.WriteLine("Enter number of book you want to borrow: ");
         if (int.TryParse(Console.ReadLine(), out int bookIndex))
         {
-
             if (bookIndex > 0 && bookIndex <= EnglishBooks.Count)
             {
-
-                int correctedIndex = bookIndex - 1;
-
-
-                while (enBorrowedBooks.Count <= correctedIndex)
+                string bookToBorrow = EnglishBooks[bookIndex - 1];
+                // تحقق إذا كان الكتاب مستعار بالفعل
+                if (enBorrowedBooks.Contains(bookToBorrow))
                 {
-                    enBorrowedBooks.Add(null);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("You have already borrowed this book.");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
-
-
-                enBorrowedBooks[correctedIndex] = EnglishBooks[correctedIndex];
-
-                Console.Write("Borrowed ");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine(enBorrowedBooks[correctedIndex]);
-                Console.ResetColor();
-                Console.WriteLine("Total borrowed English books: " + enBorrowedBooks.Where(b => b != null).Count());
+                else
+                {
+                    enBorrowedBooks.Add(bookToBorrow);
+                    Console.Write("Borrowed ");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine(bookToBorrow);
+                    Console.ResetColor();
+                    SaveBorrowedBooks();
+                }
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                SaveBorrowedBooks();
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey();
                 Console.ForegroundColor = ConsoleColor.White;
@@ -593,7 +591,8 @@ class LibrarySystem
                 if (bookChose > 0 && bookChose <= borrowed.Count)
                 {
                     string selectedBook = borrowed[bookChose - 1];
-                    int originalIndex = enBorrowedBooks.FindIndex(b => b == selectedBook);
+                    // استخدم الفهرس الأصلي من قائمة EnglishBooks
+                    int originalIndex = EnglishBooks.IndexOf(selectedBook);
 
                     Console.Write("\nYou chose: ");
                     Console.ForegroundColor = ConsoleColor.Cyan;
@@ -699,8 +698,6 @@ class LibrarySystem
         Console.WriteLine($"Book '{returnedBook}' \nhas been returned successfully.");
         Console.ForegroundColor = ConsoleColor.White;
 
-        int remaining = enBorrowedBooks.Count(b => b != null);
-        Console.WriteLine($"Remaining borrowed books: {remaining}");
         SaveBorrowedBooks();
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine("\nPress any key to continue...");
@@ -746,7 +743,10 @@ class LibrarySystem
                     default:
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine(Reverse("اختيار خاطئ!"));
-                        Console.ResetColor();
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
+                        Console.ReadKey();
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                 }
             }
@@ -785,9 +785,16 @@ class LibrarySystem
                 {
                     Console.WriteLine($"({i + 1}). {ArabicBooks[i]}");
                 }
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(Reverse("اضغط )*( للبحث عن كتاب\n "));
                 Console.ResetColor();
+                if (Console.ReadLine() == "*")
+                {
+                    SearchArabicBooks();
+                }
 
-                Console.Write(Reverse("   اختر رقم الكتاب لعرض التفاصيل او ختر 0 للالغاء \n"));
+                Console.WriteLine(Reverse(" اختر رقم الكتاب لعرض التفاصيل"));
+                Console.Write(Reverse(" او ختر )0( للالغاء"));
                 string input = Console.ReadLine();
                 validInput = int.TryParse(input, out book_choice);
 
@@ -845,24 +852,23 @@ class LibrarySystem
         {
             if (bookIndex > 0 && bookIndex <= ArabicBooks.Count)
             {
-                int correctedIndex = bookIndex - 1;
-
-                while (arBorrowedBooks.Count <= correctedIndex)
+                string bookToBorrow = ArabicBooks[bookIndex - 1];
+                // تحقق إذا كان الكتاب مستعار بالفعل
+                if (arBorrowedBooks.Contains(bookToBorrow))
                 {
-                    arBorrowedBooks.Add(null); // أو string.Empty حسب احتياجك
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(Reverse("لقد قمت باستعارة هذا الكتاب بالفعل."));
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
-                arBorrowedBooks[correctedIndex] = ArabicBooks[correctedIndex];
-
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write(arBorrowedBooks[correctedIndex]);
-                Console.ResetColor();
-                Console.WriteLine(Reverse("تم استعارة:  "));
-                Console.WriteLine(arBorrowedBooks.Where(b => b != null).Count() + Reverse("الكتب المستعاره الكليه: "));
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                SaveBorrowedBooks();
-                Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
-                Console.ReadKey();
-                Console.ForegroundColor = ConsoleColor.White;
+                else
+                {
+                    arBorrowedBooks.Add(bookToBorrow);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write(bookToBorrow);
+                    Console.ResetColor();
+                    Console.WriteLine(Reverse("تم استعارة:  "));
+                    SaveBorrowedBooks();
+                }
             }
             else
             {
@@ -877,6 +883,10 @@ class LibrarySystem
             Console.WriteLine(Reverse("ادخال خاطئ!"));
             Console.ForegroundColor = ConsoleColor.White;
         }
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
+        Console.ReadKey();
+        Console.ForegroundColor = ConsoleColor.White;
     }
 
     static void ViewBorrowedArabicBooks()
@@ -907,7 +917,8 @@ class LibrarySystem
                 if (bookChose > 0 && bookChose <= borrowed.Count)
                 {
                     string selectedBook = borrowed[bookChose - 1];
-                    int originalIndex = arBorrowedBooks.FindIndex(b => b == selectedBook);
+                    // استخدم الفهرس الأصلي من قائمة ArabicBooks
+                    int originalIndex = ArabicBooks.IndexOf(selectedBook);
 
                     Console.Write(Reverse("\nلقد اخترت: "));
                     Console.ForegroundColor = ConsoleColor.Cyan;
@@ -984,7 +995,7 @@ class LibrarySystem
         do
         {
             Console.WriteLine(Reverse("\nأدخل رقم الكتاب للاعادة "));
-            Console.Write(Reverse("(0 لإلغاء العملية): "));
+            Console.Write(Reverse(")0( لإلغاء العملية: "));
             string input = Console.ReadLine();
             validInput = int.TryParse(input, out bookIndex);
 
@@ -1014,8 +1025,6 @@ class LibrarySystem
         Console.WriteLine(Reverse($"تم اعادته بنجاح... كتاب {returnedBook}"));
         Console.ForegroundColor = ConsoleColor.White;
 
-        int remaining = arBorrowedBooks.Count(b => b != null);
-        Console.WriteLine(Reverse($"الكتب المستعارة المتبقية: {remaining}"));
         SaveBorrowedBooks();
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
@@ -1249,6 +1258,36 @@ class LibrarySystem
             Console.ForegroundColor = ConsoleColor.White;
         }
         Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+
+    static void SearchArabicBooks()
+    {
+        Console.Write(Reverse("\nادخل جزء من اسم الكتاب للبحث: "));
+        string query = Console.ReadLine();
+        string reversedQuery = Reverse(query).ToLower();
+
+        var results = ArabicBooks
+            .Select((book, idx) => new { book, idx })
+            .Where(x => x.book.ToLower().Contains(reversedQuery))
+            .ToList();
+
+        if (results.Count == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(Reverse("لا يوجد كتب مطابقة للبحث."));
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (var result in results)
+            {
+                Console.WriteLine($"({result.idx + 1}). {result.book}");
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
         Console.ReadKey();
     }
 }
