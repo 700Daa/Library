@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic; // to uses Lists<> 
 using System.IO; // to use File, StreamWriter, StreamReader
 using System.Linq; // to use LINQ methods like Where, ToList
+using System.Security.Cryptography;
 using System.Threading; // to use Thread.Sleep
 
 
@@ -461,8 +462,14 @@ class LibrarySystem
                 {
                     Console.WriteLine($"({i + 1}).  {EnglishBooks[i]}");
                 }
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\nEnter (s) to search ");
                 Console.ResetColor();
-
+                if (Console.ReadLine().ToLower() == "s")
+                {
+                    SearchEnglishBooks();
+                }
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("\nEnter the number of the book to view details\nor 0 to cancel: ");
                 string input = Console.ReadLine();
                 validInput = int.TryParse(input, out bookChose);
@@ -1217,4 +1224,31 @@ class LibrarySystem
         }
     }
 
+    static void SearchEnglishBooks()
+    {
+        Console.Write("Enter part of the book name to search: ");
+        string query = Console.ReadLine().ToLower();
+        var results = EnglishBooks
+            .Select((book, idx) => new { book, idx })
+            .Where(x => x.book.ToLower().Contains(query))
+            .ToList();
+
+        if (results.Count == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("No books found.");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (var result in results)
+            {
+                Console.WriteLine($"({result.idx + 1}). {result.book}");
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
 }
