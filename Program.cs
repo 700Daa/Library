@@ -7,6 +7,9 @@ using System.Threading; // to use Thread.Sleep
 
 class LibrarySystem
 {
+    private static string currentUsername = null;
+    private static string currentPassword = null;
+
     private static List<string> arBorrowedBooks = new List<string>();
     private static List<string> enBorrowedBooks = new List<string>();
     private static List<string> EnglishBooks = new List<string> {
@@ -197,6 +200,9 @@ class LibrarySystem
 
                 if (loginOk)
                 {
+                    currentUsername = username;
+                    currentPassword = password;
+                    LoadBorrowedBooks();
                     Console.WriteLine("Login successful! Welcome to the library.");
                     Console.ForegroundColor = ConsoleColor.White;
                     MainMenu();
@@ -531,6 +537,7 @@ class LibrarySystem
                 Console.ResetColor();
                 Console.WriteLine("Total borrowed English books: " + enBorrowedBooks.Where(b => b != null).Count());
                 Console.ForegroundColor = ConsoleColor.DarkGray;
+                SaveBorrowedBooks();
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey();
                 Console.ForegroundColor = ConsoleColor.White;
@@ -687,7 +694,7 @@ class LibrarySystem
 
         int remaining = enBorrowedBooks.Count(b => b != null);
         Console.WriteLine($"Remaining borrowed books: {remaining}");
-
+        SaveBorrowedBooks();
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
@@ -845,6 +852,7 @@ class LibrarySystem
                 Console.WriteLine(Reverse("تم استعارة:  "));
                 Console.WriteLine( arBorrowedBooks.Where(b => b != null).Count()+ Reverse("الكتب المستعاره الكليه: "));
                 Console.ForegroundColor = ConsoleColor.DarkGray;
+                SaveBorrowedBooks();
                 Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
                 Console.ReadKey();
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1001,7 +1009,7 @@ class LibrarySystem
 
         int remaining = arBorrowedBooks.Count(b => b != null);
         Console.WriteLine(Reverse($"الكتب المستعارة المتبقية: {remaining}"));
-
+        SaveBorrowedBooks();
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
         Console.ReadKey();
@@ -1148,4 +1156,65 @@ class LibrarySystem
                 Console.Clear();
         }
     }
+    static void SaveBorrowedBooks()
+    {
+        var allLines = new List<string>();
+        if (File.Exists("borrowed.txt"))
+            allLines = File.ReadAllLines("borrowed.txt").ToList();
+
+        string userKey = $"{currentUsername} {currentPassword}";
+        // نحفظ القوائم كما هي (بما فيها null) باستخدام رمز خاص للفارغ
+        string enBooks = string.Join(";", enBorrowedBooks.Select(b => b ?? ""));
+        string arBooks = string.Join(";", arBorrowedBooks.Select(b => b ?? ""));
+        string newLine = userKey + "|" + enBooks + "|" + arBooks;
+
+        bool found = false;
+        for (int i = 0; i < allLines.Count; i++)
+        {
+            if (allLines[i].StartsWith(userKey + "|"))
+            {
+                allLines[i] = newLine;
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+            allLines.Add(newLine);
+
+        File.WriteAllLines("borrowed.txt", allLines);
+    }
+
+    static void LoadBorrowedBooks()
+    {
+        enBorrowedBooks.Clear();
+        arBorrowedBooks.Clear();
+
+        // تأكد أن القوائم بنفس الطول الأصلي
+        for (int i = 0; i < EnglishBooks.Count; i++)
+            enBorrowedBooks.Add(null);
+        for (int i = 0; i < ArabicBooks.Count; i++)
+            arBorrowedBooks.Add(null);
+
+        if (!File.Exists("borrowed.txt")) return;
+        var lines = File.ReadAllLines("borrowed.txt");
+        foreach (var line in lines)
+        {
+            var parts = line.Split('|');
+            if (parts.Length != 3) continue;
+            var user = parts[0].Trim();
+            if (user == $"{currentUsername} {currentPassword}")
+            {
+                // English books
+                var enBooks = parts[1].Split(';');
+                for (int i = 0; i < enBooks.Length && i < enBorrowedBooks.Count; i++)
+                    enBorrowedBooks[i] = string.IsNullOrEmpty(enBooks[i]) ? null : enBooks[i];
+
+                // Arabic books
+                var arBooks = parts[2].Split(';');
+                for (int i = 0; i < arBooks.Length && i < arBorrowedBooks.Count; i++)
+                    arBorrowedBooks[i] = string.IsNullOrEmpty(arBooks[i]) ? null : arBooks[i];
+            }
+        }
+    }
+
 }
