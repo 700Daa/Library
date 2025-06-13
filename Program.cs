@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic; // to uses Lists<> 
 using System.IO; // to use File, StreamWriter, StreamReader
 using System.Linq; // to use LINQ methods like Where, ToList
@@ -22,7 +22,7 @@ class LibrarySystem
         "Dracula",
         };
 
-   private static List<string> enBooksDetails = new List<string> 
+    private static List<string> enBooksDetails = new List<string>
    {
         "A self-help book by L. Ron Hubbard promoting ethical living and personal improvement.",
         "A classic tragedy by William Shakespeare about love and fate.",
@@ -44,7 +44,7 @@ class LibrarySystem
         };
 
 
-    private static List<string> ArabicBooks = new List<string> { 
+    private static List<string> ArabicBooks = new List<string> {
         Reverse("ارض زيكولا 1"),
         Reverse("ارض زيكولا 2"),
         Reverse("ارض زيكولا 3"),
@@ -61,8 +61,8 @@ class LibrarySystem
         Reverse("نادر فوده -الاعوان- 7"),
         Reverse("نادر فوده -الآثم- 8")
         };
-    
-    private static List<string> arBorrowedBooksDetails = new List<string> 
+
+    private static List<string> arBorrowedBooksDetails = new List<string>
     {
         Reverse("رواية خيالية تتحدث عن مغامرات في عالم زيكولا"),
         Reverse("تكملة مغامرات زيكولا"),
@@ -116,7 +116,7 @@ class LibrarySystem
         int startLeft = 10;
         int startTop = Console.CursorTop;
         // Print the welcome message with animated letters
-        PrintE(startLeft, startTop); 
+        PrintE(startLeft, startTop);
         PrintL(startLeft + 8, startTop);
         Print3(startLeft + 16, startTop);
         PrintO(startLeft + 25, startTop);
@@ -129,8 +129,8 @@ class LibrarySystem
 
     static int choseSignInOrUp()
     {
-        int your_choice; 
-        bool isValidInput; 
+        int your_choice;
+        bool isValidInput;
 
         do
         {
@@ -180,7 +180,7 @@ class LibrarySystem
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Enter your username: ");
-            string username = Console.ReadLine();   
+            string username = Console.ReadLine();
             Console.Write("Enter your password: ");
             string password = Console.ReadLine();
 
@@ -323,7 +323,7 @@ class LibrarySystem
                 }
                 SignIn();
             }
-        }while (!createAccountOk);
+        } while (!createAccountOk);
     }
 
     static void MainMenu()
@@ -516,19 +516,19 @@ class LibrarySystem
         Console.WriteLine("Enter number of book you want to borrow: ");
         if (int.TryParse(Console.ReadLine(), out int bookIndex))
         {
-            
+
             if (bookIndex > 0 && bookIndex <= EnglishBooks.Count)
             {
-                
+
                 int correctedIndex = bookIndex - 1;
 
-                
+
                 while (enBorrowedBooks.Count <= correctedIndex)
                 {
-                    enBorrowedBooks.Add(null); 
+                    enBorrowedBooks.Add(null);
                 }
 
-                
+
                 enBorrowedBooks[correctedIndex] = EnglishBooks[correctedIndex];
 
                 Console.Write("Borrowed ");
@@ -845,12 +845,12 @@ class LibrarySystem
                     arBorrowedBooks.Add(null); // أو string.Empty حسب احتياجك
                 }
                 arBorrowedBooks[correctedIndex] = ArabicBooks[correctedIndex];
-               
+
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(arBorrowedBooks[correctedIndex]);
                 Console.ResetColor();
                 Console.WriteLine(Reverse("تم استعارة:  "));
-                Console.WriteLine( arBorrowedBooks.Where(b => b != null).Count()+ Reverse("الكتب المستعاره الكليه: "));
+                Console.WriteLine(arBorrowedBooks.Where(b => b != null).Count() + Reverse("الكتب المستعاره الكليه: "));
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 SaveBorrowedBooks();
                 Console.WriteLine(Reverse("\nاضغط أي مفتاح للمتابعة..."));
