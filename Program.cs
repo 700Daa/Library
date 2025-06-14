@@ -1,18 +1,20 @@
 using System;
-using System.Collections.Generic; // to uses Lists<> 
-using System.IO; // to use File, StreamWriter, StreamReader
-using System.Linq; // to use LINQ methods like Where, ToList
+using System.Collections.Generic; 
+using System.IO; 
+using System.Linq; 
 using System.Security.Cryptography;
-using System.Threading; // to use Thread.Sleep
+using System.Threading; 
 
 
 class LibrarySystem
 {
+
     private static string currentUsername = null;
     private static string currentPassword = null;
 
     private static List<string> arBorrowedBooks = new List<string>();
     private static List<string> enBorrowedBooks = new List<string>();
+
     private static List<string> EnglishBooks = new List<string> {
         "The Way to Happiness",
         "Romeo and Juliet",
@@ -102,9 +104,9 @@ class LibrarySystem
     static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
-        //WelcomeScreen();
+        WelcomeScreen();
 
-        // login or create account
+
         int yourChoice = choseSignInOrUp();
         Choice(yourChoice);
     }
@@ -116,7 +118,7 @@ class LibrarySystem
 
         int startLeft = 10;
         int startTop = Console.CursorTop;
-        // Print the welcome message with animated letters
+        
         PrintE(startLeft, startTop);
         PrintL(startLeft + 8, startTop);
         Print3(startLeft + 16, startTop);
@@ -155,6 +157,7 @@ class LibrarySystem
 
         return your_choice;
     }
+
 
     static void Choice(int choice)
     {
@@ -284,7 +287,7 @@ class LibrarySystem
                     Thread.Sleep(1000);
                     CreateNewAccount();
                     Console.Clear();
-                    return; // مهم حتى لا يكمل تنفيذ الدالة الأصلية
+                    return; 
                 }
                 else
                 {
@@ -526,7 +529,7 @@ class LibrarySystem
             if (bookIndex > 0 && bookIndex <= EnglishBooks.Count)
             {
                 string bookToBorrow = EnglishBooks[bookIndex - 1];
-                // تحقق إذا كان الكتاب مستعار بالفعل
+                
                 if (enBorrowedBooks.Contains(bookToBorrow))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -591,7 +594,7 @@ class LibrarySystem
                 if (bookChose > 0 && bookChose <= borrowed.Count)
                 {
                     string selectedBook = borrowed[bookChose - 1];
-                    // استخدم الفهرس الأصلي من قائمة EnglishBooks
+                    
                     int originalIndex = EnglishBooks.IndexOf(selectedBook);
 
                     Console.Write("\nYou chose: ");
@@ -853,7 +856,7 @@ class LibrarySystem
             if (bookIndex > 0 && bookIndex <= ArabicBooks.Count)
             {
                 string bookToBorrow = ArabicBooks[bookIndex - 1];
-                // تحقق إذا كان الكتاب مستعار بالفعل
+                
                 if (arBorrowedBooks.Contains(bookToBorrow))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -917,7 +920,7 @@ class LibrarySystem
                 if (bookChose > 0 && bookChose <= borrowed.Count)
                 {
                     string selectedBook = borrowed[bookChose - 1];
-                    // استخدم الفهرس الأصلي من قائمة ArabicBooks
+                   
                     int originalIndex = ArabicBooks.IndexOf(selectedBook);
 
                     Console.Write(Reverse("\nلقد اخترت: "));
@@ -1153,10 +1156,10 @@ class LibrarySystem
             foreach (char c in letterLines[i])
             {
                 Console.Write(c);
-                Thread.Sleep(5); // سرعة ظهور الحروف
+                Thread.Sleep(5); 
             }
         }
-        Thread.Sleep(60); // تأخير بعد انتهاء الحرف
+        Thread.Sleep(60); 
     }
 
     static void points(string s, int ret, int num, bool cleer)
@@ -1179,9 +1182,9 @@ class LibrarySystem
             allLines = File.ReadAllLines("borrowed.txt").ToList();
 
         string userKey = $"{currentUsername} {currentPassword}";
-        // نحفظ القوائم كما هي (بما فيها null) باستخدام رمز خاص للفارغ
-        string enBooks = string.Join(";", enBorrowedBooks.Select(b => b ?? ""));
-        string arBooks = string.Join(";", arBorrowedBooks.Select(b => b ?? ""));
+
+        string enBooks = string.Join(";", enBorrowedBooks);
+        string arBooks = string.Join(";", arBorrowedBooks);
         string newLine = userKey + "|" + enBooks + "|" + arBooks;
 
         bool found = false;
@@ -1205,12 +1208,6 @@ class LibrarySystem
         enBorrowedBooks.Clear();
         arBorrowedBooks.Clear();
 
-        // تأكد أن القوائم بنفس الطول الأصلي
-        for (int i = 0; i < EnglishBooks.Count; i++)
-            enBorrowedBooks.Add(null);
-        for (int i = 0; i < ArabicBooks.Count; i++)
-            arBorrowedBooks.Add(null);
-
         if (!File.Exists("borrowed.txt")) return;
         var lines = File.ReadAllLines("borrowed.txt");
         foreach (var line in lines)
@@ -1220,15 +1217,17 @@ class LibrarySystem
             var user = parts[0].Trim();
             if (user == $"{currentUsername} {currentPassword}")
             {
-                // English books
+                
                 var enBooks = parts[1].Split(';');
-                for (int i = 0; i < enBooks.Length && i < enBorrowedBooks.Count; i++)
-                    enBorrowedBooks[i] = string.IsNullOrEmpty(enBooks[i]) ? null : enBooks[i];
+                foreach (var book in enBooks)
+                    if (!string.IsNullOrEmpty(book))
+                        enBorrowedBooks.Add(book);
 
-                // Arabic books
+               
                 var arBooks = parts[2].Split(';');
-                for (int i = 0; i < arBooks.Length && i < arBorrowedBooks.Count; i++)
-                    arBorrowedBooks[i] = string.IsNullOrEmpty(arBooks[i]) ? null : arBooks[i];
+                foreach (var book in arBooks)
+                    if (!string.IsNullOrEmpty(book))
+                        arBorrowedBooks.Add(book);
             }
         }
     }
@@ -1259,8 +1258,8 @@ class LibrarySystem
         }
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
-    }
 
+    }
     static void SearchArabicBooks()
     {
         Console.Write(Reverse("\nادخل جزء من اسم الكتاب للبحث: "));
